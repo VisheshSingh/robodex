@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import SearchBar from './Searchbar';
-import CardList from './CardList';
-import Scroll from './Scroll';
+import SearchBar from '../components/Searchbar';
+import CardList from '../components/CardList';
+import Scroll from '../components/Scroll';
 import './App.css';
 
 class App extends Component {
@@ -32,19 +32,17 @@ class App extends Component {
       return robot.name.toLowerCase().includes(searchField);
     });
 
-    if (robots.length) {
-      return (
-        <div className="tc">
-          <h1 className="f1">RoboDex</h1>
-          <SearchBar searchChange={this.onSearchChange} />
-          <Scroll>
-            <CardList robots={filteredRobots} />
-          </Scroll>
-        </div>
-      );
-    } else {
-      return <h2 className="tc f2">Loading...</h2>;
-    }
+    return robots.length ? (
+      <div className="tc">
+        <h1 className="f1">RoboDex</h1>
+        <SearchBar searchChange={this.onSearchChange} />
+        <Scroll>
+          <CardList robots={filteredRobots} />
+        </Scroll>
+      </div>
+    ) : (
+      <h2 className="tc f2">Loading...</h2>
+    );
   }
 }
 
