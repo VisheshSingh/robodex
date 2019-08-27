@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchBar from './Searchbar';
 import CardList from './CardList';
+import Scroll from './Scroll';
 import './App.css';
 
 class App extends Component {
@@ -10,7 +11,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    robots: fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
       .then(users => {
         this.setState({
@@ -36,7 +37,9 @@ class App extends Component {
         <div className="tc">
           <h1 className="f1">RoboDex</h1>
           <SearchBar searchChange={this.onSearchChange} />
-          <CardList robots={filteredRobots} />
+          <Scroll>
+            <CardList robots={filteredRobots} />
+          </Scroll>
         </div>
       );
     } else {
