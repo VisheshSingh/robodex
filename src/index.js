@@ -4,8 +4,18 @@ import './index.css';
 import 'tachyons';
 import App from './container/App';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { searchReducer } from './searchReducer';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = createStore(searchReducer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
