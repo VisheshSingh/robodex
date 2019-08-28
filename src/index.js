@@ -7,14 +7,15 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { searchRobots, requestRobotsReducer } from './reducers';
 
 const logger = createLogger();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({ searchRobots, requestRobotsReducer });
 const store = createStore(
   rootReducer,
-  applyMiddleware(thunkMiddleware, logger)
+  composeEnhancers(applyMiddleware(thunkMiddleware, logger))
 );
 
 ReactDOM.render(
